@@ -1,0 +1,27 @@
+{
+  "name": "react-number-input",
+  "version": "0.0.0",
+  "description": "React NumberInput Component",
+  "main": "build/index.js",
+  "types": "build",
+  "scripts": {
+    "build": "tsc -p .",
+    "develop": "tsc --watch"
+  },
+  "keywords": [
+    "react",
+    "number",
+    "input",
+    "component"
+  ],
+  "author": "Bernard Stojanovic",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.2",
+    "react": "^16.9.0",
+    "typescript": "^3.6.3"
+  }
+}
