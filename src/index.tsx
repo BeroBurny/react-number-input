@@ -1,8 +1,10 @@
 import React, {DetailedHTMLProps, InputHTMLAttributes} from 'react';
 
-interface OwnProps {}
+interface OwnProps {
+  value: number,
+}
 
-type Props = OwnProps & Omit<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'type'>;
+type Props = Omit<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'type' | keyof OwnProps>;
 
 const NumberInput: React.FunctionComponent<Props> = ({...props}) => {
   return (<input type="number" {...props}/>);
