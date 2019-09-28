@@ -11,23 +11,28 @@ const NumberInput: FunctionComponent<Props> = ({value: propsValue, separatorType
   const [selectionEnd, setSelectionEnd] = useState(0);
 
   const handleChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    // save cursor position
-    setSelectionStart(target.selectionStart || 0);
-    setSelectionEnd(target.selectionEnd || 0);
+    const selectionStart = target.selectionStart || 0;
+    const selectionEnd = target.selectionEnd || 0;
+    setSelectionStart(selectionStart);
+    setSelectionEnd(selectionEnd);
 
-    const formattedValue = formatValue(target.value, digits, separatorType);
-    setValue(formattedValue);
-    if (onChange) {
-      onChange(getValueAsNumber(formattedValue, separatorType));
+    if (target.value.match(/[^0-9.,]/g) === null) {
+      const formattedValue = formatValue(target.value, digits, separatorType);
+      setValue(formattedValue);
+      if (onChange) {
+        onChange(getValueAsNumber(formattedValue, separatorType));
+      }
+    } else {
+      inputRef.current!.value = value;
+      inputRef.current!.setSelectionRange(selectionStart - 1, selectionEnd - 1);
     }
+
   };
 
   useEffect(
     () => {
       if (inputRef.current) {
         inputRef.current.value = value;
-
-        // make it happen
         inputRef.current.selectionStart = selectionStart;
         inputRef.current.selectionEnd = selectionEnd;
       }
