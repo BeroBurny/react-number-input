@@ -18,6 +18,17 @@ const NumberInput: FunctionComponent<Props> = ({value: propsValue, separatorType
 
     if (target.value.match(/[^0-9.,]/g) === null) {
       const formattedValue = formatValue(target.value, digits, separatorType);
+
+      // TODO: improve pointer position if is multiple numbers selected and deleted
+      const offset = formattedValue.length - value.length - 1;
+      if (offset >= 0) {
+        setSelectionStart(selectionStart + offset);
+        setSelectionEnd(selectionEnd + offset);
+      } else {
+        setSelectionStart(selectionStart + offset + 2);
+        setSelectionEnd(selectionEnd + offset + 2);
+      }
+
       setValue(formattedValue);
       if (onChange) {
         onChange(getValueAsNumber(formattedValue, separatorType));
@@ -51,6 +62,9 @@ const NumberInput: FunctionComponent<Props> = ({value: propsValue, separatorType
         }
       }
     }
+
+    // Backspace
+    // Delete
   };
 
   return (<input
