@@ -20,7 +20,7 @@ const formatValue = (value: number | string, digits: number = 0, separatorType: 
   }
   return sanitizedWholeNumber
     .replace(/(\d)(?=(\d{3})+(?!\d))/g, `$1${numberSeparator}`)
-    .concat(decimalSeparator, decimalNumber);
+    .concat(decimalSeparator, decimalNumber || ''.padEnd(digits, '0'));
 };
 
 export default formatValue;
