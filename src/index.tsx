@@ -20,6 +20,7 @@ const NumberInput: FunctionComponent<Props> = ({value: propsValue, separatorType
       const formattedValue = formatValue(target.value, digits, separatorType);
 
       // TODO: improve pointer position if is multiple numbers selected and deleted
+      // TODO: after first number is deleted (with backspace) cursor jumps on end
       const offset = formattedValue.length - value.length - 1;
       if (offset >= 0) {
         setSelectionStart(selectionStart + offset);
@@ -45,8 +46,14 @@ const NumberInput: FunctionComponent<Props> = ({value: propsValue, separatorType
         inputRef.current.selectionStart = selectionStart;
         inputRef.current.selectionEnd = selectionEnd;
       }
-    },
-    [value]
+    }, [value]
+  );
+
+  useEffect(() => {
+      if (getValueAsNumber(value, separatorType) !== propsValue) {
+        setValue(formatValue(propsValue, digits, separatorType));
+      }
+    }, [propsValue]
   );
 
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
