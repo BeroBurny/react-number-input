@@ -3,7 +3,7 @@ import {Props} from "./types";
 import formatValue from "./formatValue";
 import {getNumberAndDecimalSeparators, getValueAsNumber} from "./utils";
 
-const NumberInput: FunctionComponent<Props> = ({value: propsValue, separatorType, digits, onBlur, onChange, ...props}) => {
+const NumberInput: FunctionComponent<Props> = ({value: propsValue, separatorType, digits, onBlur, onChange, onFocus, onKeyDown, ...props}) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [value, setValue] = useState(formatValue(propsValue, digits, separatorType));
@@ -49,7 +49,7 @@ const NumberInput: FunctionComponent<Props> = ({value: propsValue, separatorType
     [value]
   );
 
-  const keyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     const { key } = event;
     if (key === '.' || key === ',') {
       event.preventDefault();
@@ -65,15 +65,24 @@ const NumberInput: FunctionComponent<Props> = ({value: propsValue, separatorType
 
     // Backspace
     // Delete
+
+    if (onKeyDown) {
+      onKeyDown(event);
+    }
   };
 
-  const handleFocus = ({ target }: FocusEvent<HTMLInputElement>) => {
+  const handleFocus = (event: FocusEvent<HTMLInputElement>) => {
+    const { target } = event;
     setTimeout(() => {
       const selectionStart = target.selectionStart || 0;
       const selectionEnd = target.selectionEnd || 0;
       setSelectionStart(selectionStart);
       setSelectionEnd(selectionEnd);
     });
+
+    if (onFocus) {
+      onFocus(event);
+    }
   };
 
   return (<input
@@ -81,7 +90,7 @@ const NumberInput: FunctionComponent<Props> = ({value: propsValue, separatorType
     onChange={handleChange}
     type="text"
     ref={inputRef}
-    onKeyDown={keyPressHandler}
+    onKeyDown={handleKeyDown}
     onFocus={handleFocus}
   />);
 };
