@@ -1,8 +1,8 @@
 import {SeparatorType} from "./types";
+import {getNumberAndDecimalSeparators} from "./utils";
 
 const formatValue = (value: number | string, digits: number = 0, separatorType: SeparatorType = 'eu') => {
-  const numberSeparator = separatorType === 'eu' ? '.' : ',';
-  const decimalSeparator = separatorType === 'eu' ? ',' : '.';
+  const [numberSeparator, decimalSeparator] = getNumberAndDecimalSeparators(separatorType);
 
   if (typeof value === 'number') {
     if (separatorType === 'eu') {

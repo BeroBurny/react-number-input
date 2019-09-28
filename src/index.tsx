@@ -1,6 +1,7 @@
 import React, {ChangeEvent, FunctionComponent, useEffect, useRef, useState} from 'react';
 import {Props} from "./types";
 import formatValue from "./formatValue";
+import {getValueAsNumber} from "./utils";
 
 const NumberInput: FunctionComponent<Props> = ({value: propsValue, separatorType, digits, onBlur, onChange, ...props}) => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -13,7 +14,12 @@ const NumberInput: FunctionComponent<Props> = ({value: propsValue, separatorType
     // save cursor position
     setSelectionStart(target.selectionStart || 0);
     setSelectionEnd(target.selectionEnd || 0);
-    setValue(formatValue(target.value, digits, separatorType));
+
+    const formattedValue = formatValue(target.value, digits, separatorType);
+    setValue(formattedValue);
+    if (onChange) {
+      onChange(getValueAsNumber(formattedValue, separatorType));
+    }
   };
 
   useEffect(
