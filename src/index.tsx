@@ -1,7 +1,7 @@
 import React, {ChangeEvent, FunctionComponent, useEffect, useRef, useState} from 'react';
 import {Props} from "./types";
 import formatValue from "./formatValue";
-import {getValueAsNumber} from "./utils";
+import {getNumberAndDecimalSeparators, getValueAsNumber} from "./utils";
 
 const NumberInput: FunctionComponent<Props> = ({value: propsValue, separatorType, digits, onBlur, onChange, ...props}) => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -23,14 +23,12 @@ const NumberInput: FunctionComponent<Props> = ({value: propsValue, separatorType
         onChange(getValueAsNumber(formattedValue, separatorType));
       }
     } else {
-      inputRef.current!.value = value;
-      inputRef.current!.setSelectionRange(selectionStart - 1, selectionEnd - 1);
+      target.value = value;
+      target.setSelectionRange(selectionStart - 1, selectionEnd - 1);
     }
-
   };
 
-  useEffect(
-    () => {
+  useEffect(() => {
       if (inputRef.current) {
         inputRef.current.value = value;
         inputRef.current.selectionStart = selectionStart;
@@ -40,11 +38,27 @@ const NumberInput: FunctionComponent<Props> = ({value: propsValue, separatorType
     [value]
   );
 
+  const keyPressHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    const { key } = event;
+    if (key === '.' || key === ',') {
+      event.preventDefault();
+
+      const [, decimalSeparator] = getNumberAndDecimalSeparators(separatorType);
+      if (value.indexOf(decimalSeparator) === selectionStart) {
+        if (inputRef.current) {
+          inputRef.current.selectionStart = selectionStart + 1;
+          inputRef.current.selectionEnd = selectionEnd + 1;
+        }
+      }
+    }
+  };
+
   return (<input
     {...props}
     onChange={handleChange}
     type="text"
     ref={inputRef}
+    onKeyDown={keyPressHandler}
   />);
 };
 
