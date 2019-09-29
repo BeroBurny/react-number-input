@@ -13,3 +13,8 @@ export const getValueAsNumber = (value: string, separatorType?: SeparatorType): 
 
   return Number(`${sanitizedWholeNumber}.${decimalNumber}`);
 };
+
+export const findSeparatorIndex = (value: string, separatorType?: SeparatorType) => {
+  const [, decimalSeparator] = getNumberAndDecimalSeparators(separatorType);
+  return value.indexOf(decimalSeparator);
+};

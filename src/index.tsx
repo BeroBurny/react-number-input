@@ -1,7 +1,7 @@
 import React, {ChangeEvent, FunctionComponent, FocusEvent, KeyboardEvent, useEffect, useRef, useState} from 'react';
 import {Props} from "./types";
 import formatValue from "./formatValue";
-import {getNumberAndDecimalSeparators, getValueAsNumber} from "./utils";
+import {findSeparatorIndex, getNumberAndDecimalSeparators, getValueAsNumber} from "./utils";
 
 const NumberInput: FunctionComponent<Props> = ({value: propsValue, separatorType, digits, onBlur, onChange, onFocus, onKeyDown, ...props}) => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -58,20 +58,37 @@ const NumberInput: FunctionComponent<Props> = ({value: propsValue, separatorType
 
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     const { key } = event;
+
     if (key === '.' || key === ',') {
       event.preventDefault();
 
       const [, decimalSeparator] = getNumberAndDecimalSeparators(separatorType);
       if (value.indexOf(decimalSeparator) === selectionStart) {
-        if (inputRef.current) {
-          inputRef.current.selectionStart = selectionStart + 1;
-          inputRef.current.selectionEnd = selectionEnd + 1;
-        }
+        inputRef.current!.setSelectionRange(selectionStart + 1, selectionEnd + 1);
       }
     }
 
-    // Backspace
-    // Delete
+    if (key === 'Backspace') {
+      const index = findSeparatorIndex(value, separatorType);
+      if (selectionStart === (index + 1)) {
+        setSelectionStart(selectionStart - 1);
+        setSelectionEnd(selectionEnd - 1);
+        inputRef.current!.setSelectionRange(selectionStart - 1, selectionEnd -1 );
+
+        event.preventDefault();
+      }
+    }
+
+    if (key === 'Delete') {
+      const index = findSeparatorIndex(value, separatorType);
+      if (selectionStart === index) {
+        setSelectionStart(selectionStart + 1);
+        setSelectionEnd(selectionEnd + 1);
+        inputRef.current!.setSelectionRange(selectionStart + 1, selectionEnd + 1);
+
+        event.preventDefault();
+      }
+    }
 
     if (onKeyDown) {
       onKeyDown(event);
