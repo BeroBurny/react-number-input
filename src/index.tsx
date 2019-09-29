@@ -90,6 +90,16 @@ const NumberInput: FunctionComponent<Props> = ({value: propsValue, separatorType
       }
     }
 
+    if (key === 'ArrowLeft' && selectionStart > 0) {
+        setSelectionStart(selectionStart - 1);
+        setSelectionEnd(selectionEnd - 1);
+    }
+
+    if (key === 'ArrowRight' && selectionEnd < value.length) {
+      setSelectionStart(selectionStart + 1);
+      setSelectionEnd(selectionEnd + 1);
+    }
+
     if (onKeyDown) {
       onKeyDown(event);
     }
