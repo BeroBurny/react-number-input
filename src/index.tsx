@@ -20,14 +20,16 @@ const NumberInput: FunctionComponent<Props> = ({value: propsValue, separatorType
       const formattedValue = formatValue(target.value, digits, separatorType);
 
       // TODO: improve pointer position if is multiple numbers selected and deleted
-      // TODO: after first number is deleted and coma is first character cursor jumps on end
       const offset = formattedValue.length - value.length - 1;
       if (offset >= 0) {
         setSelectionStart(selectionStart + offset);
         setSelectionEnd(selectionEnd + offset);
-      } else {
+      } else if (selectionStart + offset + 2 >= 0 && selectionEnd + offset + 2 >= 0) {
         setSelectionStart(selectionStart + offset + 2);
         setSelectionEnd(selectionEnd + offset + 2);
+      } else {
+        setSelectionStart(0);
+        setSelectionEnd(0);
       }
 
       setValue(formattedValue);
