@@ -1,9 +1,9 @@
-import React, {ChangeEvent, FunctionComponent, FocusEvent, KeyboardEvent, useEffect, useRef, useState} from 'react';
+import React, {ChangeEvent, FunctionComponent, MouseEvent, KeyboardEvent, useEffect, useRef, useState} from 'react';
 import {Props} from "./types";
 import formatValue from "./formatValue";
-import {findSeparatorIndex, getNumberAndDecimalSeparators, getValueAsNumber} from "./utils";
+import {findDecimalSeparatorIndex, getNumberAndDecimalSeparators, getValueAsNumber, isCursorOnSeparator} from "./utils";
 
-const NumberInput: FunctionComponent<Props> = ({value: propsValue, separatorType, digits, onBlur, onChange, onFocus, onKeyDown, ...props}) => {
+const NumberInput: FunctionComponent<Props> = ({value: propsValue, separatorType, digits, onBlur, onChange, onClick, onKeyDown, ...props}) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [value, setValue] = useState(formatValue(propsValue, digits, separatorType));
@@ -69,7 +69,10 @@ const NumberInput: FunctionComponent<Props> = ({value: propsValue, separatorType
     }
 
     if (key === 'Backspace') {
-      const index = findSeparatorIndex(value, separatorType);
+      const index = findDecimalSeparatorIndex(value, separatorType);
+      if (isCursorOnSeparator(value, selectionStart - 1, separatorType)) {
+        inputRef.current!.setSelectionRange(selectionStart - 1, selectionEnd - 1);
+      }
       if (selectionStart === (index + 1)) {
         setSelectionStart(selectionStart - 1);
         setSelectionEnd(selectionEnd - 1);
@@ -80,7 +83,10 @@ const NumberInput: FunctionComponent<Props> = ({value: propsValue, separatorType
     }
 
     if (key === 'Delete') {
-      const index = findSeparatorIndex(value, separatorType);
+      const index = findDecimalSeparatorIndex(value, separatorType);
+      if (isCursorOnSeparator(value, selectionStart, separatorType)) {
+        inputRef.current!.setSelectionRange(selectionStart + 1, selectionEnd + 1);
+      }
       if (selectionStart === index) {
         setSelectionStart(selectionStart + 1);
         setSelectionEnd(selectionEnd + 1);
@@ -105,17 +111,14 @@ const NumberInput: FunctionComponent<Props> = ({value: propsValue, separatorType
     }
   };
 
-  const handleFocus = (event: FocusEvent<HTMLInputElement>) => {
-    const { target } = event;
-    setTimeout(() => {
-      const selectionStart = target.selectionStart || 0;
-      const selectionEnd = target.selectionEnd || 0;
-      setSelectionStart(selectionStart);
-      setSelectionEnd(selectionEnd);
-    });
+  const handleClick = (event: MouseEvent<HTMLInputElement>) => {
+    if (inputRef.current) {
+      setSelectionStart(inputRef.current.selectionStart || 0);
+      setSelectionEnd(inputRef.current.selectionEnd || 0);
+    }
 
-    if (onFocus) {
-      onFocus(event);
+    if (onClick) {
+      onClick(event);
     }
   };
 
@@ -124,8 +127,8 @@ const NumberInput: FunctionComponent<Props> = ({value: propsValue, separatorType
     onChange={handleChange}
     type="text"
     ref={inputRef}
+    onClick={handleClick}
     onKeyDown={handleKeyDown}
-    onFocus={handleFocus}
   />);
 };
 
