@@ -39,6 +39,11 @@ export const isCursorOnSeparator = (value: string, cursorLocation: number, separ
 
 export const getValidSelectionPosition = (position: number, beforeValue: string, afterValue: string) => {
   const offset = afterValue.length - beforeValue.length - 1;
+
+  if (afterValue.length === beforeValue.length) {
+    return position;
+  }
+
   if (offset >= 0) {
     return position + offset;
   }
@@ -49,7 +54,6 @@ export const getValidSelectionPosition = (position: number, beforeValue: string,
 };
 
 export const sanitizeDecimalNumber = (value: string | undefined, digits: number): string => {
-  console.log(value, digits, value!.length < digits);
   if (!value) {
     return ''.padEnd(digits, '0');
   }

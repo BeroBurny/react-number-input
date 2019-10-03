@@ -32,7 +32,6 @@ const NumberInput: FunctionComponent<Props> = ({value: propsValue, separatorType
       setSelectionEnd(validSelectionEnd);
 
       target.value = formattedValue;
-      console.log(validSelectionEnd, validSelectionStart);
       target.setSelectionRange(validSelectionStart, validSelectionEnd);
 
       setValue(formattedValue);
