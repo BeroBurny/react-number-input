@@ -36,3 +36,14 @@ export const isCursorOnSeparator = (value: string, cursorLocation: number, separ
 
   return findIndexesOf(value, numberSeparator).some(index => index === cursorLocation);
 };
+
+export const getValidSelectionPosition = (position: number, beforeValue: string, afterValue: string) => {
+  const offset = afterValue.length - beforeValue.length - 1;
+  if (offset >= 0) {
+    return position + offset;
+  }
+  if (position + offset + 2 >= 0) {
+    return position + offset + 2;
+  }
+  return 0
+};

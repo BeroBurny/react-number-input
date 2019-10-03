@@ -1,7 +1,13 @@
 import React, {ChangeEvent, FunctionComponent, MouseEvent, KeyboardEvent, useEffect, useRef, useState} from 'react';
 import {Props} from "./types";
 import formatValue from "./formatValue";
-import {findDecimalSeparatorIndex, getNumberAndDecimalSeparators, getValueAsNumber, isCursorOnSeparator} from "./utils";
+import {
+  findDecimalSeparatorIndex,
+  getNumberAndDecimalSeparators,
+  getValidSelectionPosition,
+  getValueAsNumber,
+  isCursorOnSeparator
+} from "./utils";
 
 const NumberInput: FunctionComponent<Props> = ({value: propsValue, separatorType, digits, onBlur, onChange, onClick, onKeyDown, ...props}) => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -20,17 +26,8 @@ const NumberInput: FunctionComponent<Props> = ({value: propsValue, separatorType
       const formattedValue = formatValue(target.value, digits, separatorType);
 
       // TODO: improve pointer position if is multiple numbers selected and deleted
-      const offset = formattedValue.length - value.length - 1;
-      if (offset >= 0) {
-        setSelectionStart(selectionStart + offset);
-        setSelectionEnd(selectionEnd + offset);
-      } else if (selectionStart + offset + 2 >= 0 && selectionEnd + offset + 2 >= 0) {
-        setSelectionStart(selectionStart + offset + 2);
-        setSelectionEnd(selectionEnd + offset + 2);
-      } else {
-        setSelectionStart(0);
-        setSelectionEnd(0);
-      }
+      setSelectionStart(getValidSelectionPosition(selectionStart, value, formattedValue));
+      setSelectionEnd(getValidSelectionPosition(selectionEnd, value, formattedValue));
 
       setValue(formattedValue);
       if (onChange) {
