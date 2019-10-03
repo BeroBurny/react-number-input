@@ -26,8 +26,14 @@ const NumberInput: FunctionComponent<Props> = ({value: propsValue, separatorType
       const formattedValue = formatValue(target.value, digits, separatorType);
 
       // TODO: improve pointer position if is multiple numbers selected and deleted
-      setSelectionStart(getValidSelectionPosition(selectionStart, value, formattedValue));
-      setSelectionEnd(getValidSelectionPosition(selectionEnd, value, formattedValue));
+      const validSelectionStart = getValidSelectionPosition(selectionStart, value, formattedValue);
+      const validSelectionEnd = getValidSelectionPosition(selectionEnd, value, formattedValue);
+      setSelectionStart(validSelectionStart);
+      setSelectionEnd(validSelectionEnd);
+
+      target.value = formattedValue;
+      console.log(validSelectionEnd, validSelectionStart);
+      target.setSelectionRange(validSelectionStart, validSelectionEnd);
 
       setValue(formattedValue);
       if (onChange) {
@@ -42,13 +48,17 @@ const NumberInput: FunctionComponent<Props> = ({value: propsValue, separatorType
   useEffect(() => {
       if (inputRef.current) {
         inputRef.current.value = value;
-        inputRef.current.selectionStart = selectionStart;
-        inputRef.current.selectionEnd = selectionEnd;
+        inputRef.current.setSelectionRange(selectionStart, selectionEnd);
       }
-    }, [value]);
+    }, []);
 
   useEffect(() => {
       if (getValueAsNumber(value, separatorType) !== propsValue) {
+        if (inputRef.current) {
+          inputRef.current.value = value;
+          inputRef.current.setSelectionRange(selectionStart, selectionEnd);
+        }
+
         setValue(formatValue(propsValue, digits, separatorType));
       }
     }, [propsValue]);

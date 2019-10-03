@@ -47,3 +47,17 @@ export const getValidSelectionPosition = (position: number, beforeValue: string,
   }
   return 0
 };
+
+export const sanitizeDecimalNumber = (value: string | undefined, digits: number): string => {
+  console.log(value, digits, value!.length < digits);
+  if (!value) {
+    return ''.padEnd(digits, '0');
+  }
+  if (value.length > digits) {
+    return value.slice(0, digits);
+  }
+  if (value.length < digits) {
+    return value.padEnd(digits, '0');
+  }
+  return value;
+};
