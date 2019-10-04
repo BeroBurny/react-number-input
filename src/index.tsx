@@ -10,6 +10,10 @@ import {
 } from "./utils";
 
 const NumberInput: FunctionComponent<Props> = ({value: propsValue, separatorType, digits, onBlur, onChange, onClick, onKeyDown, ...props}) => {
+  if (digits! > 100) {
+    digits = 100;
+  }
+
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [value, setValue] = useState(formatValue(propsValue, digits, separatorType));
