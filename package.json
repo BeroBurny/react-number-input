@@ -1,9 +1,21 @@
 {
   "name": "react-number-input",
   "version": "0.0.0",
-  "description": "React NumberInput Component",
+  "description": "React number input Component",
+  "homepage": "https://github.com/owner/project#readme",
+  "bugs": {
+    "url": "https://github.com/BeroBurny/react-number-input/issues",
+    "email": "bero4net@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BeroBurny/react-number-input.git"
+  },
   "main": "build/index.js",
   "types": "build",
+  "files": [
+    "build/"
+  ],
   "scripts": {
     "build": "tsc -p .",
     "develop": "tsc --watch"
@@ -14,7 +26,12 @@
     "input",
     "component"
   ],
-  "author": "Bernard Stojanovic",
+  "author": {
+    "name": "Bernard Stojanović",
+    "email": "bero4net@gmail.com",
+    "url": ""
+  },
+  "contributors": [],
   "license": "MIT",
   "peerDependencies": {
     "react": ">=16.8.0"
