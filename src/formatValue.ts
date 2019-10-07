@@ -13,7 +13,7 @@ const formatValue = (value: number | string, digits: number = 0, separatorType: 
   }
 
   const [ wholeNumber, decimalNumber ] = value.split(decimalSeparator);
-  const sanitizedWholeNumber = wholeNumber.replace(/[^0-9]+/g, '');
+  const sanitizedWholeNumber = wholeNumber.replace(/^(?=[\-])+|[^0-9]+/g, '');
   const sanitizedDecimalNumber = sanitizeDecimalNumber(decimalNumber, digits);
 
   if (digits === 0) {

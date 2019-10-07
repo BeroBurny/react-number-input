@@ -26,7 +26,9 @@ const NumberInput: FunctionComponent<Props> = ({value: propsValue, separatorType
     setSelectionStart(selectionStart);
     setSelectionEnd(selectionEnd);
 
-    if (target.value.match(/[^0-9.,]/g) === null) {
+    const regexMatch = target.value.match(/^(?=[\-])|[^0-9.,]/g);
+    if (regexMatch === null || (regexMatch.length === 1 && regexMatch[0].length === 0)) {
+
       const formattedValue = formatValue(target.value, digits, separatorType);
 
       // TODO: improve pointer position if is multiple numbers selected and deleted
