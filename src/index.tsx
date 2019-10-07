@@ -1,6 +1,6 @@
 import React, {ChangeEvent, FunctionComponent, MouseEvent, KeyboardEvent, useEffect, useRef, useState} from 'react';
 import {Props} from "./types";
-import formatValue from "./formatValue";
+import formatValue from "./utils/formatValue";
 import {
   findDecimalSeparatorIndex,
   getNumberAndDecimalSeparators,

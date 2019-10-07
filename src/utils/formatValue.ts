@@ -1,5 +1,5 @@
-import {SeparatorType} from "./types";
-import {getNumberAndDecimalSeparators, sanitizeDecimalNumber} from "./utils";
+import {SeparatorType} from "../types";
+import {getNumberAndDecimalSeparators, sanitizeDecimalNumber} from "./index";
 
 const formatValue = (value: number | string, digits: number = 0, separatorType: SeparatorType = 'eu') => {
   const [numberSeparator, decimalSeparator] = getNumberAndDecimalSeparators(separatorType);
