@@ -19,7 +19,8 @@
   "scripts": {
     "build": "tsc -p .",
     "develop": "tsc --watch",
-    "test": "jest"
+    "test": "jest",
+    "test:coverage": "jest --coverage"
   },
   "keywords": [
     "react",
