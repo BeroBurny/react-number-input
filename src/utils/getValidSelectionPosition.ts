@@ -1,7 +1,7 @@
 const getValidSelectionPosition = (position: number, beforeValue: string, afterValue: string) => {
   const offset = afterValue.length - beforeValue.length - 1;
 
-  if (afterValue.length === beforeValue.length) {
+  if (afterValue.length === beforeValue.length && position >= 0) {
     return position;
   }
 
