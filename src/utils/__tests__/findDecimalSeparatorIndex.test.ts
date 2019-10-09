@@ -1,4 +1,4 @@
-import findDecimalSeparatorIndex from "./findDecimalSeparatorIndex";
+import findDecimalSeparatorIndex from "../findDecimalSeparatorIndex";
 
 test('value 10.123,69 without separator type', () => {
   const index = findDecimalSeparatorIndex('10.123,69');

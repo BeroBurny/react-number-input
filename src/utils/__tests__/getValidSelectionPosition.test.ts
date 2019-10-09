@@ -1,4 +1,4 @@
-import getValidSelectionPosition from "./getValidSelectionPosition";
+import getValidSelectionPosition from "../getValidSelectionPosition";
 
 test('position is negative', () => {
   const result = getValidSelectionPosition(-1, '0000', '0000');

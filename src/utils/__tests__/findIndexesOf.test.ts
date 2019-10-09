@@ -1,4 +1,4 @@
-import findIndexesOf from "./findIndexesOf";
+import findIndexesOf from "../findIndexesOf";
 
 test('\'.\' index location in \'10.1.23\'', () => {
   const number = '10.1.23';

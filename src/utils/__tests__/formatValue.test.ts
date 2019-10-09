@@ -1,4 +1,4 @@
-import formatValue from "./formatValue";
+import formatValue from "../formatValue";
 
 test('if value is a number', () => {
   const result = formatValue(1000);

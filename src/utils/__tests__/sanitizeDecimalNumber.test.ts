@@ -1,4 +1,4 @@
-import sanitizeDecimalNumber from "./sanitizeDecimalNumber";
+import sanitizeDecimalNumber from "../sanitizeDecimalNumber";
 
 test('if value is undefined with \'4\' digits', () => {
   const result = sanitizeDecimalNumber(undefined, 4);

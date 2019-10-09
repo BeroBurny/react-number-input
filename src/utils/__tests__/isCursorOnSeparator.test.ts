@@ -1,4 +1,4 @@
-import isCursorOnSeparator from "./isCursorOnSeparator";
+import isCursorOnSeparator from "../isCursorOnSeparator";
 
 test('on value 12.345.6789', () => {
   const value = '12.345.6789';

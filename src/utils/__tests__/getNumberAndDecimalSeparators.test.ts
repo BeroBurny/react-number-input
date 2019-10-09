@@ -1,4 +1,4 @@
-import getNumberAndDecimalSeparators from "./getNumberAndDecimalSeparators";
+import getNumberAndDecimalSeparators from "../getNumberAndDecimalSeparators";
 
 test('without parameters', () => {
   const [numberSeparator, decimalSeparator] = getNumberAndDecimalSeparators();
