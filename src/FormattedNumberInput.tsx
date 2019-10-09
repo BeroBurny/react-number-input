@@ -9,7 +9,7 @@ import {
   isCursorOnSeparator
 } from "./utils";
 
-const NumberInput: FunctionComponent<Props> = ({value: propsValue, separatorType, digits, onBlur, onChange, onClick, onKeyDown, ...props}) => {
+const FormattedNumberInput: FunctionComponent<Props> = ({value: propsValue, separatorType, digits, onBlur, onChange, onClick, onKeyDown, ...props}) => {
   if (digits! > 100) {
     digits = 100;
   }
@@ -144,4 +144,4 @@ const NumberInput: FunctionComponent<Props> = ({value: propsValue, separatorType
   />);
 };
 
-export default NumberInput;
+export default FormattedNumberInput;
