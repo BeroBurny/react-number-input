@@ -10,12 +10,23 @@ Best component library to provide great developer and user experience for number
 ![npm](https://img.shields.io/npm/dm/@beroburny/react-number-input) 
 [![GitHub license](https://img.shields.io/github/license/BeroBurny/react-number-input)](https://github.com/BeroBurny/react-number-input/blob/master/LICENSE.md)
 
+## Installation
+##### with npm
+```
+npm i @beroburny/react-number-input
+```
+##### with yarn
+```
+yarn add @beroburny/react-number-input
+```
+
+
 # Component's
 
 ## `FormattedNumberInput` (alias `CurrencyInput`)  
 Provide formatted values to provide better visual representation of imputed number.  
 (format number 10000000.3 to be like 10,000,000.30)
-#### Props
+### Props
 Props | Required | Type
 ----- |:--------:|------
 value | ✓ | number
@@ -26,7 +37,7 @@ onBlur | | (value: number) => void
 
 **and standard props from input field**
 
-#### Basic usage
+### Basic usage
 ```JSX
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -46,5 +57,5 @@ ReactDOM.render(<App />, document.getElementById('root'));
   * now `NumberInput` need to be imported as named import `FormattedNumberInput`
   * add alias for `FormattedNumberInput`  to be `CurrencyInput`
 * added unit test's
-* fix bug with changed value
-####[entire changelog](CHANGELOG.md)
+* fix bug with changed value  
+[entire changelog](CHANGELOG.md)

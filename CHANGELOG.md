@@ -1,4 +1,4 @@
-#Changelog
+# Changelog  
 ## 0.0.1-2
 * Refactor code
   * now `NumberInput` need to be imported as named import `FormattedNumberInput`
