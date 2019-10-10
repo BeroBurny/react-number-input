@@ -3,7 +3,9 @@ Best component library to provide great developer and user experience for number
   
 ### Still in development
 
-![npm peer dependency version](https://img.shields.io/npm/dependency-version/@beroburny/react-number-input/peer/react) 
+![npm peer dependency version](https://img.shields.io/npm/dependency-version/@beroburny/react-number-input/peer/react)  
+
+[![Build Status](https://travis-ci.org/BeroBurny/react-number-input.svg?branch=master)](https://travis-ci.org/BeroBurny/react-number-input) 
 ![npm](https://img.shields.io/npm/v/@beroburny/react-number-input) 
 ![npm](https://img.shields.io/npm/dm/@beroburny/react-number-input) 
 [![GitHub license](https://img.shields.io/github/license/BeroBurny/react-number-input)](https://github.com/BeroBurny/react-number-input/blob/master/LICENSE.md)
@@ -16,7 +18,7 @@ Provide formatted values to provide better visual representation of imputed numb
 #### Props
 Props | Required | Type
 ----- |:--------:|------
-value | X | number
+value | ✓ | number
 separatorType | | 'eu' or 'us'
 digits | | number
 onChange | | (value: number) => void
