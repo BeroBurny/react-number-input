@@ -1,26 +1,19 @@
-# React Number Imput  
-### Still in development use at own risk!
+# React Number Input  
+Best component library to provide great developer and user experience for number inputs.
+  
+### Still in development
 
-Basic idea is to create generic input component to suppot formated number while typing with great UX.  
-(to feel like classic input but have format eg 10000000.3 to be 10,000,000.30)
+![npm peer dependency version](https://img.shields.io/npm/dependency-version/@beroburny/react-number-input/peer/react) 
+![npm](https://img.shields.io/npm/v/@beroburny/react-number-input) 
+![npm](https://img.shields.io/npm/dm/@beroburny/react-number-input) 
+[![GitHub license](https://img.shields.io/github/license/BeroBurny/react-number-input)](https://github.com/BeroBurny/react-number-input/blob/master/LICENSE.md)
 
-#### Basic usage
-```JSX
-import React from 'react';
-import ReactDOM from 'react-dom';
-import NumberInput from '@beroburny/react-number-input';
+# Component's
 
-const App = () => {
-  const [value, setValue] = React.useState(0);
-
-  return (<NumberInput value={value} onChange={setValue} />);
-};
-
-ReactDOM.render(<App />, document.getElementById('root'));
-```
-
-### Props
-
+## `FormattedNumberInput` (alias `CurrencyInput`)  
+Provide formatted values to provide better visual representation of imputed number.  
+(format number 10000000.3 to be like 10,000,000.30)
+#### Props
 Props | Required | Type
 ----- |:--------:|------
 value | X | number
@@ -30,3 +23,26 @@ onChange | | (value: number) => void
 onBlur | | (value: number) => void
 
 **and standard props from input field**
+
+#### Basic usage
+```JSX
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {CurrencyInput} from '@beroburny/react-number-input';
+
+const App = () => {
+  const [value, setValue] = React.useState(0);
+
+  return (<CurrencyInput value={value} onChange={setValue} />);
+};
+
+ReactDOM.render(<App />, document.getElementById('root'));
+```
+
+# Changelog (latest)
+* Refactor code
+  * now `NumberInput` need to be imported as named import `FormattedNumberInput`
+  * add alias for `FormattedNumberInput`  to be `CurrencyInput`
+* added unit test's
+* fix bug with changed value
+####[entire changelog](CHANGELOG.md)
