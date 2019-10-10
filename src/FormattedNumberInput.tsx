@@ -59,12 +59,14 @@ const FormattedNumberInput: FunctionComponent<Props> = ({value: propsValue, sepa
 
   useEffect(() => {
       if (getValueAsNumber(value, separatorType) !== propsValue) {
+        const formattedValue = formatValue(propsValue, digits, separatorType);
+
         if (inputRef.current) {
-          inputRef.current.value = value;
+          inputRef.current.value = formattedValue;
           inputRef.current.setSelectionRange(selectionStart, selectionEnd);
         }
 
-        setValue(formatValue(propsValue, digits, separatorType));
+        setValue(formattedValue);
       }
     }, [propsValue]);
 
