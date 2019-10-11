@@ -7,7 +7,6 @@ export type SeparatorType = 'eu' | 'us';
 interface OwnProps {
   value: number,
   onChange?: Callback,
-  onBlur?: Callback,
   separatorType?: SeparatorType,
   digits?: number,
 }
