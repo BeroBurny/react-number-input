@@ -1,5 +1,8 @@
-# Changelog  
-## 0.1.1-4
+# Changelog 
+## 0.0.1-5
+* add build and publish script (already happens 2 times to forget build a project before publish)
+
+## 0.0.1-4
 * fix onBlur event (now is normal)
 
 ## 0.0.1-2

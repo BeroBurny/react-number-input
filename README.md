@@ -3,8 +3,8 @@ Best component library to provide great developer and user experience for number
   
 ### Still in development
 
-![npm peer dependency version](https://img.shields.io/npm/dependency-version/@beroburny/react-number-input/peer/react)  
-
+![npm peer dependency version](https://img.shields.io/npm/dependency-version/@beroburny/react-number-input/peer/react)
+![David](https://img.shields.io/david/beroburny/react-number-input)
 [![Build Status](https://travis-ci.org/BeroBurny/react-number-input.svg?branch=master)](https://travis-ci.org/BeroBurny/react-number-input) 
 ![npm](https://img.shields.io/npm/v/@beroburny/react-number-input) 
 ![npm](https://img.shields.io/npm/dm/@beroburny/react-number-input) 
@@ -53,5 +53,6 @@ ReactDOM.render(<App />, document.getElementById('root'));
 ```
 
 # Changelog (latest)
+* add build and publish script
 * fix onBlur event (now is normal)
 [entire changelog](CHANGELOG.md)

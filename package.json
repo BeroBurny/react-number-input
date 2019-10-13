@@ -18,6 +18,7 @@
   ],
   "scripts": {
     "build": "tsc -p .",
+    "build:publish": "tsc -p . && npm publish",
     "develop": "tsc --watch",
     "test": "jest",
     "test:coverage": "jest --coverage"
