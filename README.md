@@ -9,6 +9,7 @@ Best component library to provide great developer and user experience for number
 ![npm](https://img.shields.io/npm/v/@beroburny/react-number-input) 
 ![npm](https://img.shields.io/npm/dm/@beroburny/react-number-input) 
 [![GitHub license](https://img.shields.io/github/license/BeroBurny/react-number-input)](https://github.com/BeroBurny/react-number-input/blob/master/LICENSE.md)
+[![Known Vulnerabilities](https://snyk.io//test/github/BeroBurny/react-number-input/badge.svg)](https://snyk.io//test/github/BeroBurny/react-number-input)
 
 ## Installation
 ##### with npm
@@ -33,7 +34,6 @@ value | ✓ | number
 separatorType | | 'eu' or 'us'
 digits | | number
 onChange | | (value: number) => void
-onBlur | | (value: number) => void
 
 **and standard props from input field**
 
@@ -53,9 +53,5 @@ ReactDOM.render(<App />, document.getElementById('root'));
 ```
 
 # Changelog (latest)
-* Refactor code
-  * now `NumberInput` need to be imported as named import `FormattedNumberInput`
-  * add alias for `FormattedNumberInput`  to be `CurrencyInput`
-* added unit test's
-* fix bug with changed value  
+* fix onBlur event (now is normal)
 [entire changelog](CHANGELOG.md)
