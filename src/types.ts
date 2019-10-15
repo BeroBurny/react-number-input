@@ -9,6 +9,8 @@ interface OwnProps {
   onChange?: Callback,
   separatorType?: SeparatorType,
   digits?: number,
+  minimumFractionDigits?: number,
+  maximumFractionDigits?: number,
 }
 
 export type Props = OwnProps & Omit<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'type' | keyof OwnProps>;

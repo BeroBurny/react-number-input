@@ -1,12 +1,15 @@
-const sanitizeDecimalNumber = (value: string | undefined, digits: number): string => {
+const sanitizeDecimalNumber = (value?: string, minimumDigits?: number,  maximumDigits?: number): string => {
+  if (!value && minimumDigits) {
+    return ''.padEnd(minimumDigits, '0');
+  }
   if (!value) {
-    return ''.padEnd(digits, '0');
+    return '';
   }
-  if (value.length > digits) {
-    return value.slice(0, digits);
+  if (maximumDigits && value.length > maximumDigits) {
+    return value.slice(0, maximumDigits);
   }
-  if (value.length < digits) {
-    return value.padEnd(digits, '0');
+  if (minimumDigits && value.length < minimumDigits) {
+    return value.padEnd(minimumDigits, '0');
   }
   return value;
 };
