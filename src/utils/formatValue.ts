@@ -1,22 +1,27 @@
 import {SeparatorType} from "../types";
 import {getNumberAndDecimalSeparators, sanitizeDecimalNumber} from "./index";
 
-const formatValue = (value: number | string, digits: number = 0, separatorType: SeparatorType = 'eu') => {
+const formatValue = (value: number | string, minimumDigits?: number,  maximumDigits?: number, separatorType: SeparatorType = 'eu') => {
+  if (minimumDigits && maximumDigits && minimumDigits > maximumDigits) {
+    minimumDigits = maximumDigits;
+  }
+
   const [numberSeparator, decimalSeparator] = getNumberAndDecimalSeparators(separatorType);
 
   if (typeof value === 'number') {
+    const newValue = minimumDigits || maximumDigits ?
     if (separatorType === 'eu') {
-      value = value.toFixed(digits).replace('.', ',');
+      value = value.toFixed(minimumDigits).replace('.', ',');
     } else {
-      value = value.toFixed(digits);
+      value = value.toFixed(minimumDigits);
     }
   }
 
   const [ wholeNumber, decimalNumber ] = value.split(decimalSeparator);
   const sanitizedWholeNumber = wholeNumber.replace(/^(?=[\-])+|[^0-9]+/g, '');
-  const sanitizedDecimalNumber = sanitizeDecimalNumber(decimalNumber, digits);
+  const sanitizedDecimalNumber = sanitizeDecimalNumber(decimalNumber, minimumDigits,  maximumDigits);
 
-  if (digits === 0) {
+  if (!sanitizedDecimalNumber) {
     return sanitizedWholeNumber.replace(/(\d)(?=(\d{3})+(?!\d))/g, `$1${numberSeparator}`);
   }
   return sanitizedWholeNumber

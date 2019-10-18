@@ -5,7 +5,7 @@
 - [ ] findDecimalSeparatorIndex  
 - [ ] findIndexesOf  
 - [ ] formatValue  
-- [ ] getNumberAndDecimalSeparators  
+- [x] getNumberAndDecimalSeparators  
 - [ ] getValidSelectionPosition  
 - [ ] getValueAsNumber  
 - [ ] isCursorOnSeparator  
