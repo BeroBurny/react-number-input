@@ -7,6 +7,7 @@
 - [ ] formatValue  
 - [x] getNumberAndDecimalSeparators  
 - [ ] getValidSelectionPosition  
-- [ ] getValueAsNumber  
+- [ ] getValueAsNumber
+- [x] getValueAsStrings 
 - [ ] isCursorOnSeparator  
 - [x] sanitizeDecimalNumber  

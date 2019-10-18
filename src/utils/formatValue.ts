@@ -1,20 +1,12 @@
 import {SeparatorType} from "../types";
 import {getNumberAndDecimalSeparators, sanitizeDecimalNumber} from "./index";
+import getValueAsStrings from './getValueAsStrings';
 
 const formatValue = (value: number | string, minimumDigits?: number,  maximumDigits?: number, separatorType: SeparatorType = 'eu') => {
-  if (minimumDigits && maximumDigits && minimumDigits > maximumDigits) {
-    minimumDigits = maximumDigits;
-  }
-
   const [numberSeparator, decimalSeparator] = getNumberAndDecimalSeparators(separatorType);
 
   if (typeof value === 'number') {
-    const newValue = minimumDigits || maximumDigits ?
-    if (separatorType === 'eu') {
-      value = value.toFixed(minimumDigits).replace('.', ',');
-    } else {
-      value = value.toFixed(minimumDigits);
-    }
+    value = getValueAsStrings(value, minimumDigits, maximumDigits, separatorType);
   }
 
   const [ wholeNumber, decimalNumber ] = value.split(decimalSeparator);

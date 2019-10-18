@@ -36,20 +36,4 @@ describe('value as a number', () => {
   test('if value is a number without decimal point and \'us\' separator', () => {
     const result = formatValue(1000, undefined, undefined,'us');
 
-    expect(result).toBe('1,000');
-  });
-
-  test('if value is a number with decimal point without minimum and maximum digits and \'us\' separator', () => {
-    const resultA = formatValue(1000.11, undefined, undefined,'us');
-    const resultB = formatValue(1000.10, undefined, undefined,'us');
-
-    expect(resultA).toBe('1,000.11');
-    expect(resultB).toBe('1,000.1');
-  });
-
-  test('if value is a negative number and \'us\' separator', () => {
-    const result = formatValue(1000, undefined, undefined,'us');
-
-    expect(result).toBe('-1,000');
-  });
 });
