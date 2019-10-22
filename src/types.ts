@@ -1,4 +1,4 @@
-import {DetailedHTMLProps, InputHTMLAttributes} from "react";
+import {DetailedHTMLProps, InputHTMLAttributes} from 'react';
 
 type Callback = (value: number) => void;
 
@@ -8,7 +8,6 @@ interface OwnProps {
   value: number,
   onChange?: Callback,
   separatorType?: SeparatorType,
-  digits?: number,
   minimumFractionDigits?: number,
   maximumFractionDigits?: number,
 }

@@ -1,4 +1,13 @@
-import React, {ChangeEvent, FunctionComponent, MouseEvent, KeyboardEvent, useEffect, useRef, useState} from 'react';
+import React, {
+  ChangeEvent,
+  FunctionComponent,
+  MouseEvent,
+  KeyboardEvent,
+  useEffect,
+  useRef,
+  useState,
+  useCallback
+} from 'react';
 import {Props} from "./types";
 import formatValue from "./utils/formatValue";
 import {
@@ -9,14 +18,21 @@ import {
   isCursorOnSeparator
 } from "./utils";
 
-const FormattedNumberInput: FunctionComponent<Props> = ({value: propsValue, separatorType, digits, onChange, onClick, onKeyDown, ...props}) => {
-  if (digits! > 100) {
-    digits = 100;
+const FormattedNumberInput: FunctionComponent<Props> = React.forwardRef(({
+  value: propsValue, separatorType, onChange, onClick, minimumFractionDigits, maximumFractionDigits, onKeyDown,
+  ...props
+}, ref) => {
+  if (minimumFractionDigits! >  maximumFractionDigits!) {
+    minimumFractionDigits = maximumFractionDigits;
   }
 
   const inputRef = useRef<HTMLInputElement>(null);
+  const refCB = useCallback((r) => {
+    (inputRef as any).current = r;
+    (ref as any).current = r;
+  }, [ref]);
 
-  const [value, setValue] = useState(formatValue(propsValue, digits, separatorType));
+  const [value, setValue] = useState(formatValue(propsValue, minimumFractionDigits, maximumFractionDigits, separatorType));
   const [selectionStart, setSelectionStart] = useState(0);
   const [selectionEnd, setSelectionEnd] = useState(0);
 
@@ -29,7 +45,7 @@ const FormattedNumberInput: FunctionComponent<Props> = ({value: propsValue, sepa
     const regexMatch = target.value.match(/^(?=[\-])|[^0-9.,]/g);
     if (regexMatch === null || (regexMatch.length === 1 && regexMatch[0].length === 0)) {
 
-      const formattedValue = formatValue(target.value, digits, separatorType);
+      const formattedValue = formatValue(target.value, minimumFractionDigits, maximumFractionDigits, separatorType);
 
       // TODO: improve pointer position if is multiple numbers selected and deleted
       const validSelectionStart = getValidSelectionPosition(selectionStart, value, formattedValue);
@@ -59,7 +75,7 @@ const FormattedNumberInput: FunctionComponent<Props> = ({value: propsValue, sepa
 
   useEffect(() => {
       if (getValueAsNumber(value, separatorType) !== propsValue) {
-        const formattedValue = formatValue(propsValue, digits, separatorType);
+        const formattedValue = formatValue(propsValue, minimumFractionDigits, maximumFractionDigits, separatorType);
 
         if (inputRef.current) {
           inputRef.current.value = formattedValue;
@@ -72,6 +88,7 @@ const FormattedNumberInput: FunctionComponent<Props> = ({value: propsValue, sepa
 
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     const { key } = event;
+    // TODO: if is not set minimumFractionDigits user need to be able to add decimal point by own
 
     if (key === '.' || key === ',') {
       event.preventDefault();
@@ -140,10 +157,10 @@ const FormattedNumberInput: FunctionComponent<Props> = ({value: propsValue, sepa
     {...props}
     onChange={handleChange}
     type="text"
-    ref={inputRef}
+    ref={refCB}
     onClick={handleClick}
     onKeyDown={handleKeyDown}
   />);
-};
+});
 
 export default FormattedNumberInput;
