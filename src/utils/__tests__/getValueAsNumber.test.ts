@@ -1,5 +1,17 @@
 import getValueAsNumber from "../getValueAsNumber";
 
+test('string \'312\' to be returned as number without separator', () => {
+  const result = getValueAsNumber('312');
+
+  expect(result).toBe(312);
+});
+
+test('string \'-312\' to be returned as number without separator', () => {
+  const result = getValueAsNumber('-312');
+
+  expect(result).toBe(-312);
+});
+
 test('string \'21.312,23\' to be returned as number without separator', () => {
   const result = getValueAsNumber('21.312,23');
 
@@ -11,7 +23,6 @@ test('string \'-21.312,23\' to be returned as number without separator', () => {
 
   expect(result).toBe(-21312.23);
 });
-
 
 test('string \'21.312,23\' to be returned as number with separator \'eu\'', () => {
   const result = getValueAsNumber('21.312,23', 'eu');
