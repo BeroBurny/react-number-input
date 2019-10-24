@@ -4,10 +4,10 @@
 ## Utils
 - [ ] findDecimalSeparatorIndex  
 - [ ] findIndexesOf  
-- [ ] formatValue  
+- [x] formatValue  
 - [x] getNumberAndDecimalSeparators  
 - [ ] getValidSelectionPosition  
-- [ ] getValueAsNumber
+- [x] getValueAsNumber
 - [x] getValueAsStrings 
 - [ ] isCursorOnSeparator  
 - [x] sanitizeDecimalNumber  
