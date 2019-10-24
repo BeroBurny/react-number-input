@@ -2,12 +2,12 @@
 **some of them need to be fixed**  
 
 ## Utils
-- [ ] findDecimalSeparatorIndex  
-- [ ] findIndexesOf  
+- [x] findDecimalSeparatorIndex  
+- [x] findIndexesOf  
 - [x] formatValue  
 - [x] getNumberAndDecimalSeparators  
-- [ ] getValidSelectionPosition  
-- [x] getValueAsNumber
-- [x] getValueAsStrings 
-- [ ] isCursorOnSeparator  
+- [x] getValidSelectionPosition  
+- [x] getValueAsNumber  
+- [x] getValueAsStrings  
+- [x] isCursorOnSeparator  
 - [x] sanitizeDecimalNumber  
