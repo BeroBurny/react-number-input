@@ -1,5 +1,4 @@
 # Code Tests
-**some of them need to be fixed**  
 
 ## Utils
 - [x] findDecimalSeparatorIndex  

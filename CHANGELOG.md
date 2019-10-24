@@ -1,4 +1,8 @@
 # Changelog 
+## 0.0.1-7
+* improve unit tests
+* change single `digits` value with `minimumFractionDigits` and `maximumFractionDigits` to grain more control over decimal values  
+
 ## 0.0.1-5
 * add build and publish script (already happens 2 times to forget build a project before publish)
 

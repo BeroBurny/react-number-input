@@ -4,12 +4,13 @@ Best component library to provide great developer and user experience for number
 ### Still in development
 
 ![npm peer dependency version](https://img.shields.io/npm/dependency-version/@beroburny/react-number-input/peer/react)
-![David](https://img.shields.io/david/beroburny/react-number-input)
-[![Build Status](https://travis-ci.org/BeroBurny/react-number-input.svg?branch=master)](https://travis-ci.org/BeroBurny/react-number-input) 
 ![npm](https://img.shields.io/npm/v/@beroburny/react-number-input) 
 ![npm](https://img.shields.io/npm/dm/@beroburny/react-number-input) 
-[![GitHub license](https://img.shields.io/github/license/BeroBurny/react-number-input)](https://github.com/BeroBurny/react-number-input/blob/master/LICENSE.md)
+![David](https://img.shields.io/david/beroburny/react-number-input)
+[![Build Status](https://travis-ci.org/BeroBurny/react-number-input.svg?branch=master)](https://travis-ci.org/BeroBurny/react-number-input) 
+[![codecov](https://codecov.io/gh/BeroBurny/react-number-input/branch/master/graph/badge.svg)](https://codecov.io/gh/BeroBurny/react-number-input)
 [![Known Vulnerabilities](https://snyk.io//test/github/BeroBurny/react-number-input/badge.svg)](https://snyk.io//test/github/BeroBurny/react-number-input)
+[![GitHub license](https://img.shields.io/github/license/BeroBurny/react-number-input)](https://github.com/BeroBurny/react-number-input/blob/master/LICENSE.md)
 
 ## Installation
 ##### with npm
@@ -32,7 +33,8 @@ Props | Required | Type
 ----- |:--------:|------
 value | ✓ | number
 separatorType | | 'eu' or 'us'
-digits | | number
+minimumFractionDigits | | number
+maximumFractionDigits | | number
 onChange | | (value: number) => void
 
 **and standard props from input field**
@@ -53,6 +55,6 @@ ReactDOM.render(<App />, document.getElementById('root'));
 ```
 
 # Changelog (latest)
-* add build and publish script
-* fix onBlur event (now is normal)
+* improve unit tests  
+* change single `digits` value with `minimumFractionDigits` and `maximumFractionDigits` to grain more control over decimal values  
 [entire changelog](CHANGELOG.md)
