@@ -9,7 +9,7 @@ test('string \'21.312,23\' to be returned as number without separator', () => {
 test('string \'-21.312,23\' to be returned as number without separator', () => {
   const result = getValueAsNumber('-21.312,23');
 
-  expect(result).toBe(21312.23);
+  expect(result).toBe(-21312.23);
 });
 
 
