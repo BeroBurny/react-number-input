@@ -3,6 +3,7 @@ node_js:
   - lts/*
 install:
   - npm install
+  - npm install codecov
 script:
   - npm test
   - codecov -f coverage/*.json
