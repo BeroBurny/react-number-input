@@ -104,7 +104,7 @@ const FormattedNumberInput: FunctionComponent<Props> = React.forwardRef(({
       if (isCursorOnSeparator(value, selectionStart - 1, separatorType)) {
         inputRef.current!.setSelectionRange(selectionStart - 1, selectionEnd - 1);
       }
-      if (selectionStart === (index + 1)) {
+      if (selectionStart === (index + 1) && index !== -1) {
         setSelectionStart(selectionStart - 1);
         setSelectionEnd(selectionEnd - 1);
         inputRef.current!.setSelectionRange(selectionStart - 1, selectionEnd -1 );
