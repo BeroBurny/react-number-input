@@ -57,4 +57,6 @@ ReactDOM.render(<App />, document.getElementById('root'));
 # Changelog (latest)
 * small work around in `getValidSelectionPosition` to fix positioning  
 * fix bug's on deleting numbers with backspace  
+* fix cannot read property `length` of `undefined`
+* fix reference error
 [entire changelog](CHANGELOG.md)

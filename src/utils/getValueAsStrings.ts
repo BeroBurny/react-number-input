@@ -6,7 +6,7 @@ const getValueAsStrings = (value: number, minimumDigits?: number,  maximumDigits
   }
 
   let valueAsString: string;
-  const decimalLength = value % 1 === 0 ? 0 : String(value).split('.')[1].length;
+  const decimalLength = value % 1 === 0 ? 0 : (String(value).split('.')[1] || '').length;
   if (minimumDigits !== undefined && maximumDigits !== undefined && minimumDigits === maximumDigits || decimalLength < minimumDigits!) {
     valueAsString = value.toFixed(minimumDigits);
   } else if (decimalLength > maximumDigits!) {

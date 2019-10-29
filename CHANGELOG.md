@@ -1,4 +1,8 @@
 # Changelog 
+## 0.0.1-9
+* fix cannot read property `length` of `undefined`
+* fix reference error
+
 ## 0.0.1-8
 * small work around in `getValidSelectionPosition` to fix positioning  
 * fix bug's on deleting numbers with backspace  
