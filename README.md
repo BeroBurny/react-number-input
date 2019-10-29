@@ -55,6 +55,6 @@ ReactDOM.render(<App />, document.getElementById('root'));
 ```
 
 # Changelog (latest)
-* improve unit tests  
-* change single `digits` value with `minimumFractionDigits` and `maximumFractionDigits` to grain more control over decimal values  
+* small work around in `getValidSelectionPosition` to fix positioning  
+* fix bug's on deleting numbers with backspace  
 [entire changelog](CHANGELOG.md)

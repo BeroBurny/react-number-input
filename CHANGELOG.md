@@ -1,4 +1,8 @@
 # Changelog 
+## 0.0.1-8
+* small work around in `getValidSelectionPosition` to fix positioning  
+* fix bug's on deleting numbers with backspace  
+
 ## 0.0.1-7
 * improve unit tests
 * change single `digits` value with `minimumFractionDigits` and `maximumFractionDigits` to grain more control over decimal values  
