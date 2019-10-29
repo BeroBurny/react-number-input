@@ -103,7 +103,7 @@ const FormattedNumberInput: FunctionComponent<Props> = React.forwardRef(({
 
     if (key === 'Backspace') {
       const index = findDecimalSeparatorIndex(value, separatorType);
-      if (isCursorOnSeparator(value, selectionStart - 1, separatorType)) {
+      if (isCursorOnSeparator(value, selectionStart - 1, separatorType) && selectionStart === selectionEnd) {
         inputRef.current!.setSelectionRange(selectionStart - 1, selectionEnd - 1);
       }
       if (selectionStart === (index + 1) && index !== -1) {
