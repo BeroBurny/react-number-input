@@ -29,7 +29,9 @@ const FormattedNumberInput: FunctionComponent<Props> = React.forwardRef(({
   const inputRef = useRef<HTMLInputElement>(null);
   const refCB = useCallback((r) => {
     (inputRef as any).current = r;
-    (ref as any).current = r;
+    if (ref) {
+      (ref as any).current = r;
+    }
   }, [ref]);
 
   const [value, setValue] = useState(formatValue(propsValue, minimumFractionDigits, maximumFractionDigits, separatorType));
