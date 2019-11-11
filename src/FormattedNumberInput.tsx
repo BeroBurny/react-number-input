@@ -49,14 +49,12 @@ const FormattedNumberInput: FunctionComponent<Props> = React.forwardRef(({
 
       const formattedValue = formatValue(target.value, minimumFractionDigits, maximumFractionDigits, separatorType);
 
-      // TODO: improve pointer position if is multiple numbers selected and deleted
-      const validSelectionStart = getValidSelectionPosition(selectionStart, value, formattedValue);
-      const validSelectionEnd = getValidSelectionPosition(selectionEnd, value, formattedValue);
-      setSelectionStart(validSelectionStart);
-      setSelectionEnd(validSelectionEnd);
+      const validSelection = getValidSelectionPosition(selectionStart, value, formattedValue);
+      setSelectionStart(validSelection);
+      setSelectionEnd(validSelection);
 
       target.value = formattedValue;
-      target.setSelectionRange(validSelectionStart, validSelectionEnd);
+      target.setSelectionRange(validSelection, validSelection);
 
       setValue(formattedValue);
       if (onChange) {

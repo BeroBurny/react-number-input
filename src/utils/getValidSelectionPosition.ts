@@ -1,21 +1,17 @@
-const getValidSelectionPosition = (position: number, beforeValue: string, afterValue: string) => {
-  const offset = afterValue.length - beforeValue.length - 1;
+import getNumberAndDecimalSeparators from "./getNumberAndDecimalSeparators";
+import findIndexesOf from "./findIndexesOf";
+import {SeparatorType} from "../types";
 
-  if (position !== 0 && beforeValue.length > 2 && afterValue.length === 1) {
-    return 1;
-  }
+const getValidSelectionPosition = (position: number, beforeValue: string, afterValue: string, separatorType?: SeparatorType) => {
+  const [numberSeparator] = getNumberAndDecimalSeparators(separatorType);
 
-  if (afterValue.length === beforeValue.length && position >= 0) {
-    return position;
-  }
+  const beforeIndexes = findIndexesOf(beforeValue, numberSeparator).filter(value => position >= value);
+  const afterIndexes =  findIndexesOf(afterValue, numberSeparator).filter(value => position >= value);
 
-  if (offset >= 0) {
-    return position + offset;
-  }
-  if (position + offset + 2 >= 0) {
-    return position + offset + 2;
-  }
-  return 0
+  const offset = afterIndexes.length - beforeIndexes.length + (beforeIndexes.some(value => value === position) ? 1 : 0);
+
+  const newPosition = position + offset
+  return newPosition > 0 ? newPosition : 0;
 };
 
 export default getValidSelectionPosition;
