@@ -91,11 +91,19 @@ const FormattedNumberInput: FunctionComponent<Props> = React.forwardRef(({
     // TODO: if is not set minimumFractionDigits user need to be able to add decimal point by own
 
     if (key === '.' || key === ',') {
-      event.preventDefault();
+      const isAllSelected = (inputRef.current!.selectionStart || 0) === 0 && inputRef.current!.value.length === (inputRef.current!.selectionEnd || 0);
 
       const [, decimalSeparator] = getNumberAndDecimalSeparators(separatorType);
-      if (value.indexOf(decimalSeparator) === selectionStart) {
-        inputRef.current!.setSelectionRange(selectionStart + 1, selectionEnd + 1);
+      if (key === decimalSeparator && !isAllSelected) {
+        event.preventDefault();
+
+        if (value.indexOf(decimalSeparator) === selectionStart) {
+          inputRef.current!.setSelectionRange(selectionStart + 1, selectionEnd + 1);
+        }
+      } else if (key === decimalSeparator && isAllSelected) {
+        inputRef.current!.value = '0';
+      } else {
+        event.preventDefault();
       }
     }
 
