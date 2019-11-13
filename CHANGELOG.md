@@ -1,4 +1,9 @@
 # Changelog 
+## 0.0.1-10
+* refactor `getValidSelectionPosition` to get more consistent cursor position  
+* set cursor after separator if entire number is changed with separator
+* if is 1st number 0 then he become new number
+
 ## 0.0.1-9
 * fix cannot read property `length` of `undefined`
 * fix reference error

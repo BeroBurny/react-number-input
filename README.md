@@ -55,8 +55,7 @@ ReactDOM.render(<App />, document.getElementById('root'));
 ```
 
 # Changelog (latest)
-* small work around in `getValidSelectionPosition` to fix positioning  
-* fix bug's on deleting numbers with backspace  
-* fix cannot read property `length` of `undefined`
-* fix reference error
+* refactor `getValidSelectionPosition` to get more consistent cursor position  
+* set cursor after separator if entire number is changed with separator  
+* if is 1st number 0 then he become new number  
 [entire changelog](CHANGELOG.md)

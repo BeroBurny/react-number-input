@@ -5,7 +5,8 @@
 - [x] findIndexesOf  
 - [x] formatValue  
 - [x] getNumberAndDecimalSeparators  
-- [ ] getValidSelectionPosition  
+- [x] getValidSelectionPosition  
+- [ ] fixFirstNumber  
 - [x] getValueAsNumber  
 - [x] getValueAsStrings  
 - [x] isCursorOnSeparator  
