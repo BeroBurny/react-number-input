@@ -17,6 +17,7 @@ import {
   getValueAsNumber,
   isCursorOnSeparator
 } from "./utils";
+import fixFirstNumber from "./utils/fixFirstNumber";
 
 const FormattedNumberInput: FunctionComponent<Props> = React.forwardRef(({
   value: propsValue, separatorType, onChange, onClick, minimumFractionDigits, maximumFractionDigits, onKeyDown,
@@ -39,17 +40,19 @@ const FormattedNumberInput: FunctionComponent<Props> = React.forwardRef(({
   const [selectionEnd, setSelectionEnd] = useState(0);
 
   const handleChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    const selectionStart = target.selectionStart || 0;
+    let selectionStart = target.selectionStart || 0;
     const selectionEnd = target.selectionEnd || 0;
     setSelectionStart(selectionStart);
     setSelectionEnd(selectionEnd);
 
     const regexMatch = target.value.match(/^(?=[\-])|[^0-9.,]/g);
     if (regexMatch === null || (regexMatch.length === 1 && regexMatch[0].length === 0)) {
+      const [fixedNumber, fixCursor] = fixFirstNumber(target.value, separatorType);
+      if (fixCursor) {selectionStart--}
 
-      const formattedValue = formatValue(target.value, minimumFractionDigits, maximumFractionDigits, separatorType);
+      const formattedValue = formatValue(fixedNumber, minimumFractionDigits, maximumFractionDigits, separatorType);
 
-      const validSelection = getValidSelectionPosition(selectionStart, value, formattedValue);
+      const validSelection = getValidSelectionPosition(selectionStart, value, formattedValue, separatorType);
       setSelectionStart(validSelection);
       setSelectionEnd(validSelection);
 

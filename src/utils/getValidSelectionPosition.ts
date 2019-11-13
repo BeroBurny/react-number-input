@@ -10,8 +10,8 @@ const getValidSelectionPosition = (position: number, beforeValue: string, afterV
 
   const offset = afterIndexes.length - beforeIndexes.length + (beforeIndexes.some(value => value === position) ? 1 : 0);
 
-  const newPosition = position + offset
-  return newPosition > 0 ? newPosition : 0;
+  const newPosition = position + offset;
+  return newPosition >= 0 ? newPosition : 0;
 };
 
 export default getValidSelectionPosition;
