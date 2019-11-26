@@ -97,7 +97,12 @@ const FormattedNumberInput: FunctionComponent<Props> = React.forwardRef(({
       const isAllSelected = (inputRef.current!.selectionStart || 0) === 0 && inputRef.current!.value.length === (inputRef.current!.selectionEnd || 0);
 
       const [, decimalSeparator] = getNumberAndDecimalSeparators(separatorType);
-      if (key === decimalSeparator && !isAllSelected) {
+      const isOnlyMinus = (inputRef.current!.selectionStart || 0) === 1 && inputRef.current!.value[0] === '-' && (inputRef.current!.value[1] === decimalSeparator || inputRef.current!.value[1] === undefined);
+
+      if (key === decimalSeparator && isOnlyMinus) {
+        inputRef.current!.value = '-0' + inputRef.current!.value.slice(2);
+        inputRef.current!.setSelectionRange(2,2);
+      } else if (key === decimalSeparator && !isAllSelected) {
         event.preventDefault();
 
         if (value.indexOf(decimalSeparator) === selectionStart) {
