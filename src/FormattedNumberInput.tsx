@@ -23,7 +23,7 @@ const FormattedNumberInput: FunctionComponent<Props> = React.forwardRef(({
   value: propsValue, separatorType, onChange, onClick, minimumFractionDigits, maximumFractionDigits, onKeyDown,
   ...props
 }, ref) => {
-  if (minimumFractionDigits! >  maximumFractionDigits!) {
+  if (minimumFractionDigits! > maximumFractionDigits!) {
     minimumFractionDigits = maximumFractionDigits;
   }
 
@@ -100,13 +100,20 @@ const FormattedNumberInput: FunctionComponent<Props> = React.forwardRef(({
       const isOnlyMinus = (inputRef.current!.selectionStart || 0) === 1 && inputRef.current!.value[0] === '-' && (inputRef.current!.value[1] === decimalSeparator || inputRef.current!.value[1] === undefined);
 
       if (key === decimalSeparator && isOnlyMinus && !isAllSelected) {
-        inputRef.current!.value = '-0' + inputRef.current!.value.slice(2);
+        inputRef.current!.value = `-0${inputRef.current!.value.slice(2)}`;
         inputRef.current!.setSelectionRange(2,2);
       } else if (key === decimalSeparator && !isAllSelected) {
         event.preventDefault();
 
-        if (value.indexOf(decimalSeparator) === selectionStart) {
+        if (inputRef.current!.value[0] === decimalSeparator && selectionStart === 0) {
+          inputRef.current!.value = `0${inputRef.current!.value}`;
+          inputRef.current!.setSelectionRange(2, 2);
+          setSelectionStart(2);
+          setSelectionEnd(2);
+        } else if (value.indexOf(decimalSeparator) === selectionStart) {
           inputRef.current!.setSelectionRange(selectionStart + 1, selectionEnd + 1);
+          setSelectionStart(selectionStart + 1);
+          setSelectionEnd(selectionEnd + 1);
         }
       } else if (key === decimalSeparator && isAllSelected) {
         inputRef.current!.value = '0';
